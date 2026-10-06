@@ -121,6 +121,27 @@ footer{position:relative;overflow:hidden;margin-top:46px;background:var(--navy);
 footer .orn{opacity:.3;mix-blend-mode:screen;left:-50px;bottom:-30px;width:min(50vw,340px)}
 footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;line-height:2}
 
+/* ---------- speaker decks ---------- */
+.spk{position:relative;z-index:1;margin-top:20px;background:#fff;border:4px solid #fff;border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden}
+.spk table{width:100%;border-collapse:collapse;font-size:13.5px}
+.spk th,.spk td{padding:11px 12px;border-top:1px solid var(--line);text-align:left;vertical-align:middle}
+.spk thead th{background:var(--tint);color:var(--navy);font-size:12px;font-weight:700;border-top:0;white-space:nowrap}
+.spk .who{font-weight:700;color:var(--navy)}
+.spk .who small{display:block;font-weight:400;font-size:11.5px;color:var(--muted);margin-top:1px}
+.spk .num{font-family:var(--n);white-space:nowrap;color:var(--muted);font-size:12.5px}
+.spk .cnt{font-family:var(--n);font-weight:700;color:var(--blue);white-space:nowrap;font-size:15px}
+.spk tr.ka td{background:var(--tint2);color:var(--muted);font-size:12px}
+.spk tr.ka .cnt{color:var(--muted);font-weight:400;font-size:12px}
+@media (max-width:700px){
+  .spk thead{display:none}
+  .spk tr{display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:10px 12px;border-top:1px solid var(--line)}
+  .spk td{border:0;padding:1px 0}
+  .spk td.who{grid-column:1}
+  .spk td.cnt{grid-column:2;grid-row:1;text-align:right}
+  .spk td.prog,.spk td.num{grid-column:1/-1;font-size:12px;color:var(--muted)}
+}
+
 /* ---------- floating index ---------- */
 .fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;
   display:flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border:0;border-radius:100px;
@@ -199,6 +220,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
       <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go">P10</span></a>
       <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P8</span></a>
       <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P3</span></a>
+      <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go">一覧</span></a>
     </div>
   </div>
 </section>
@@ -212,10 +234,28 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   </div>
 </section>
 
-<section class="sec" id="files">
+<section class="sec" id="speakers">
+  <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:-20px;right:-70px;width:min(48vw,310px)">
+  <div class="wrap">
+    <div class="shead"><i>03 / SPEAKER DECKS</i><h2>登壇者のスライドは<em>あと何枚</em></h2><div class="rule"></div></div>
+    <p class="lead">クリッカーPCに入っている登壇者様スライド（全81枚）を、登壇者ごとに分けた枚数です。</p>
+    <div class="spk"><table>
+      <thead><tr><th>登壇者</th><th>プログラム</th><th>切替</th><th>クリッカー通し</th><th>枚数</th></tr></thead>
+      <tbody><tr><td class="who">① 有沢 正人 様<small>HR GENESIS株式会社 代表取締役</small></td><td class="prog">基調講演</td><td class="num">14:07頃</td><td class="num">通し 1–42</td><td class="cnt">42枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 43）→ ② オカモトヤ様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">② 鈴木 美穂子 様<small>株式会社オカモトヤ 代表取締役</small></td><td class="prog">事例紹介 1社目</td><td class="num">15:01頃</td><td class="num">通し 44–54</td><td class="cnt">11枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 55）→ ③ 正和興業様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">③ 星 徹 様<small>正和興業株式会社 代表取締役</small></td><td class="prog">事例紹介 2社目</td><td class="num">15:07頃</td><td class="num">通し 56–64</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 65）→ ④ トーリツ様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">④ 鈴木 恵里子 様<small>株式会社トーリツ 代表取締役</small></td><td class="prog">事例紹介 3社目</td><td class="num">15:13頃</td><td class="num">通し 66–74</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 75）→ 交流セッションへ</td><td class="cnt">1枚</td></tr><tr><td class="who">⑤ 荒川 様<small>交流セッション 進行</small></td><td class="prog">交流セッション</td><td class="num">15:50頃</td><td class="num">通し 76–80</td><td class="cnt">5枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 81）→ 終了（会場スクリーンへ戻す）</td><td class="cnt">1枚</td></tr></tbody>
+    </table></div>
+    <div class="note">
+      <b>キーアートは枚数に入れない</b>　通し 43・55・65・75・81 は登壇者のスライドではなく、次の登壇者へ渡すための画です。上の枚数には含めていません。<br>
+      <b>サムネイル付きの一覧</b>　1枚ずつの絵と「残りあと何枚」が入ったPDFを、ドライブの
+      <a href="https://drive.google.com/drive/folders/1w6QNh4YXKHQT4P612hxrjcd5KBtDA4JW">タイスラ</a>
+      フォルダに置いています（<b>登壇者スライド一覧_縦</b>／<b>スライド進行表＋登壇者一覧</b>）。
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="files">
   <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:10px;right:-80px;width:min(46vw,300px)">
   <div class="wrap">
-    <div class="shead"><i>03 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>04 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
     <p class="lead">OBSやStream Deckに読み込ませるものはGoogleドライブに置いてあります。</p>
     <div class="files">
       <div class="file"><b>OBSシーンコレクション</b><div>
@@ -235,6 +275,8 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
         <a href="https://drive.google.com/file/d/17Q4DUgyJB19xvkYPsQ5MgNPNP4z8-9Zq/view">第2部（0928）</a></div></div>
       <div class="file"><b>全体スケジュール</b><div>
         <a href="https://drive.google.com/file/d/1oASfk7cLfW4L480Q8cT_rZN2BrMyemZU/view">Excel</a></div></div>
+      <div class="file"><b>登壇者スライド一覧</b><div>
+        <a href="https://drive.google.com/drive/folders/1w6QNh4YXKHQT4P612hxrjcd5KBtDA4JW">タイスラ フォルダ内（縦版 ／ 進行表マージ版）</a></div></div>
       <div class="file"><b>本番素材フォルダ</b><div>
         <a href="https://drive.google.com/drive/folders/1w6QNh4YXKHQT4P612hxrjcd5KBtDA4JW">タイスラ</a> ／
         <a href="https://drive.google.com/drive/folders/1cTfp_mrYNptRyMe58o3iBIuXO-_2JEHl">帯・PinP</a> ／
@@ -262,7 +304,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   <div class="bd" id="bd"></div>
   <div class="panel">
     <button class="close" id="close" type="button">閉じる</button>
-    <h4>LOOKUP</h4><div class="navlist" id="navQ"></div>
+    <h4>LOOKUP</h4><div class="navlist" id="navQ"><a href="#speakers"><span class="n">一覧</span>登壇者のスライドはあと何枚</a></div>
     <h4>DOCUMENTS</h4><div class="navlist" id="navP"></div>
   </div>
 </div>
@@ -301,6 +343,8 @@ QS.forEach(function(q){
   a.innerHTML='<span class="n">P'+q[1]+'</span>';a.appendChild(document.createTextNode(q[0]));
   a.addEventListener("click",closeSheet);navQ.appendChild(a);
 });
+// 目次の先頭に静的に置いたリンクも、押したらシートを閉じる
+navQ.querySelector("a").addEventListener("click",closeSheet);
 
 var cur=document.getElementById("cur"),links=navP.querySelectorAll("a[data-p]");
 if("IntersectionObserver" in window){
