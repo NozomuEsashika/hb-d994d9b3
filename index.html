@@ -146,6 +146,28 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 .acc .i strong{font-family:var(--n);font-size:19px;color:var(--navy)}
 .acc .i a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--line)}
 
+/* ---------- operation ---------- */
+.ops{position:relative;z-index:1;margin-top:16px;background:#fff;border:4px solid #fff;border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden}
+.ops h3{margin:0;padding:13px 16px;font-size:14px;color:var(--navy);background:var(--tint);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ops h3 small{font-weight:400;font-size:12px;color:var(--muted)}
+.ops h3 a{margin-left:auto;font-size:12px;color:var(--blue);text-decoration:none;border-bottom:1px solid currentColor}
+.ops table{width:100%;border-collapse:collapse;font-size:13px}
+.ops th,.ops td{padding:10px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.ops thead th{background:var(--tint2);color:var(--navy);font-size:11.5px;font-weight:700;white-space:nowrap}
+.ops .t{font-family:var(--n);font-weight:700;color:var(--navy);white-space:nowrap}
+.ops .cue{color:var(--muted);font-size:12.5px}
+.ops .out{color:var(--blue);font-size:12.5px}
+.ops tr.hi td{background:#FFF4F2}
+.ops img.sdk{width:30px;height:30px;border-radius:5px;vertical-align:middle;margin:0 2px}
+@media (max-width:760px){
+  .ops thead{display:none}
+  .ops tr{display:block;border-top:1px solid var(--line);padding:11px 14px}
+  .ops td{display:block;border:0;padding:1px 0}
+  .ops .t{font-size:13.5px}
+}
+
 /* ---------- speaker decks ---------- */
 .spk{position:relative;z-index:1;margin-top:20px;background:#fff;border:4px solid #fff;border-radius:14px;
   box-shadow:var(--shadow);overflow:hidden}
@@ -285,6 +307,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
       <a class="row" href="#p11"><span class="q">ケーブルの本数・長さ</span><span class="go"><b>資料</b><u></u>11</span></a>
       <a class="row" href="#pwire"><span class="q">機材の繋ぎこみを1枚で見たい</span><span class="go">全体図</span></a>
       <a class="row" href="#p6"><span class="q">どのポートに何を挿す（ATEM・会場OBS）</span><span class="go"><b>資料</b><u></u>06</span></a>
+      <a class="row" href="#ops"><span class="q">いま何を押せばいい（卓の操作）</span><span class="go">操作</span></a>
       <a class="row" href="#p12"><span class="q">スライドの絵を探したい</span><span class="go"><b>資料</b><u></u>12</span></a>
       <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go">枚数</span></a>
       <a class="row" href="#p10"><span class="q">使う機材を確認したい</span><span class="go"><b>資料</b><u></u>10</span></a>
@@ -324,10 +347,32 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   </div>
 </section>
 
-<section class="sec alt" id="speakers">
+<section class="sec alt" id="ops">
+  <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:-30px;right:-70px;width:min(48vw,320px)">
+  <div class="wrap">
+    <div class="shead"><i>05 / OPERATION</i><h2>卓の<em>操作</em></h2><div class="rule"></div></div>
+    <p class="lead">時刻と、そのとき押すものだけを並べた表。紙のマニュアルと同じ中身です。</p>
+    <div class="ops">
+      <h3>会場用OBS　<small>会場スクリーンに出る絵／スライド送り・BGM・タイマー</small>
+        <a href="https://drive.google.com/drive/folders/1UBKo6hNLnxR0JZHDocNUq2mZ0e3yCIV8">PDF ↗</a></h3>
+      <table><thead><tr><th>時刻</th><th>きっかけ</th><th>操作</th><th>出る絵</th></tr></thead><tbody><tr><td class="t">13:30</td><td class="cue">開場・待機</td><td>①OP（VTR）</td><td class="out">OP_Real（ループ）＋BGM</td></tr><tr class="hi"><td class="t">13:57</td><td class="cue">開会の3分前</td><td><b>収録を開始</b>（録画ボタン）</td><td class="out">—</td></tr><tr><td class="t">14:00</td><td class="cue">開会（司会 平井様）</td><td>②第1部 へ。スライド <b>01→02</b></td><td class="out">開会</td></tr><tr><td class="t">14:00</td><td class="cue">事業紹介</td><td>03 へ送る <span class="kk"><img class="sdk" src="sdk/v1-2-2.png" alt=""></span></td><td class="out">事業紹介_3つの無料支援</td></tr><tr><td class="t">14:03頃</td><td class="cue">本日のスケジュール</td><td>04</td><td class="out">タイムテーブル</td></tr><tr><td class="t">14:05</td><td class="cue">基調講演へ</td><td>05 → 06</td><td class="out">基調講演_中扉／有沢様プロフィール</td></tr><tr class="hi"><td class="t">14:07頃</td><td class="cue"><span class="star">★</span> 有沢様の合図</td><td>07 まで送ってから <b>③第1部_登壇者（クリッカー）</b></td><td class="out">有沢様スライド（1〜42枚）</td></tr><tr><td class="t">14:45頃</td><td class="cue">質疑応答</td><td>②第1部 に戻して 08</td><td class="out">質疑応答</td></tr><tr><td class="t">14:59</td><td class="cue">基調講演 終わり</td><td>09</td><td class="out">キーアート</td></tr><tr><td class="t">15:00</td><td class="cue">事例紹介</td><td>10 → 11</td><td class="out">事例紹介_中扉／オカモトヤ</td></tr><tr class="hi"><td class="t">15:01頃</td><td class="cue"><span class="star">★</span> オカモトヤ様</td><td>12 まで送って <b>③</b></td><td class="out">オカモトヤ様スライド（44〜54枚）</td></tr><tr><td class="t">15:06頃</td><td class="cue">1社目 終わり</td><td>②第1部 に戻して 13</td><td class="out">事例紹介_正和興業</td></tr><tr class="hi"><td class="t">15:07頃</td><td class="cue"><span class="star">★</span> 正和興業様</td><td>14 まで送って <b>③</b></td><td class="out">正和興業様スライド（56〜64枚）</td></tr><tr><td class="t">15:12頃</td><td class="cue">2社目 終わり</td><td>②第1部 に戻して 15</td><td class="out">事例紹介_トーリツ</td></tr><tr class="hi"><td class="t">15:13頃</td><td class="cue"><span class="star">★</span> トーリツ様</td><td>16 まで送って <b>③</b></td><td class="out">トーリツ様スライド（66〜74枚）</td></tr><tr><td class="t">15:18</td><td class="cue">3社目 終わり</td><td>②第1部 に戻して 17 → 18</td><td class="out">事例紹介_中扉／キーアート</td></tr><tr><td class="t">15:20</td><td class="cue">ブース案内</td><td>19</td><td class="out">サステナブルワーク企業_登録制度</td></tr><tr class="hi"><td class="t">15:20</td><td class="cue">休憩へ</td><td>20 → <b>④休憩（＋BGM）</b></td><td class="out">クリッカーPCの休憩pptx（ループ）＋BGM</td></tr><tr><td class="t">15:30</td><td class="cue">第2部 トークセッション</td><td><b>⑤第2部</b> へ。01 から <span class="kk"><img class="sdk" src="sdk/v2-2-2.png" alt=""></span> で送る</td><td class="out">第2部 01〜09</td></tr><tr><td class="t">15:50</td><td class="cue">交流セッション</td><td>第2部 10〜20 を送る</td><td class="out">第2部 10〜20</td></tr><tr class="hi"><td class="t">15:50頃</td><td class="cue"><span class="star">★</span> 荒川様</td><td><b>⑥第2部_登壇者（クリッカー）</b></td><td class="out">荒川様スライド（76〜80枚）</td></tr><tr><td class="t">16:55</td><td class="cue">閉会</td><td>⑤第2部 に戻して 21〜24</td><td class="out">閉会／サーベイ／セミナー告知／アンケート</td></tr><tr><td class="t">17:00</td><td class="cue">アフター交流</td><td>25 → 26 を送ったあと <b>⑦END（＋BGM）</b></td><td class="out">ご参加ありがとうございました＋BGM</td></tr><tr class="hi"><td class="t">17:30</td><td class="cue">終了</td><td><b>収録を停止</b></td><td class="out">—</td></tr></tbody></table>
+    </div>
+    <div class="ops">
+      <h3>配信用OBS　<small>Zoomに出る絵／ATEMのカメラ切替</small>
+        <a href="https://drive.google.com/drive/folders/1UBKo6hNLnxR0JZHDocNUq2mZ0e3yCIV8">PDF ↗</a></h3>
+      <table><thead><tr><th>時刻</th><th>きっかけ</th><th>操作</th><th>出る絵</th></tr></thead><tbody><tr class="hi"><td class="t">13:45</td><td class="cue">配信開始</td><td>Zoomウェビナー開始 → <b>①OP（VTR）</b></td><td class="out">OP_LIVE（ループ）＋BGM</td></tr><tr class="hi"><td class="t">13:57</td><td class="cue">開会の3分前</td><td><b>収録を開始</b>（録画ボタン）</td><td class="out">—</td></tr><tr><td class="t">14:00</td><td class="cue">開会（司会 平井様）</td><td><b>③本編／PinP</b></td><td class="out">会場の絵＋カメラのワイプ＋帯</td></tr><tr><td class="t">14:05</td><td class="cue">基調講演</td><td>スライド主体 → ③　／　人物主体 → <b>②全画面（カメラ）</b></td><td class="out">切替で見せる</td></tr><tr><td class="t">14:07頃</td><td class="cue">有沢様スライドへ</td><td>会場の絵が有沢様スライドに変わる。③のままでよい</td><td class="out">会場の絵＝有沢様スライド</td></tr><tr><td class="t">14:45頃</td><td class="cue">質疑応答</td><td>②全画面（カメラ）</td><td class="out">登壇者・司会をカメラで</td></tr><tr><td class="t">15:00</td><td class="cue">事例紹介 3社</td><td>③ と ② を内容で切替</td><td class="out">—</td></tr><tr class="hi"><td class="t">15:18</td><td class="cue">配信終了アナウンス（司会の締めと同時）</td><td><b>④アンケート／PinP</b></td><td class="out">アンケート案内＋カメラのワイプ</td></tr><tr class="hi"><td class="t">15:20</td><td class="cue">本編おわり</td><td><b>⑤END</b></td><td class="out">ご参加ありがとうございました＋BGM</td></tr><tr class="hi"><td class="t">15:35</td><td class="cue">蓋絵おわり</td><td><b>配信を停止</b>（収録は続ける）</td><td class="out">—</td></tr><tr><td class="t">15:30〜</td><td class="cue">第2部以降</td><td><b>配信なし</b>。会場のみ。カメラは回したまま収録を続ける</td><td class="out">—</td></tr><tr class="hi"><td class="t">17:30</td><td class="cue">終了</td><td><b>収録を停止</b></td><td class="out">—</td></tr></tbody></table>
+    </div>
+    <div class="note">
+      <b>★ の行＝クリッカーPC（登壇者のスライド）へ渡すところ。</b>渡したあとは登壇者がご自分で送る。戻すときは必ず ②（または⑤）へ戻してから番号を送る。<br>
+      <b>カウントダウンは交流セッションのワークのときだけ。</b>それ以外では出さない。消し忘れると全シーンで出続ける。
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="speakers">
   <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:-20px;right:-70px;width:min(48vw,310px)">
   <div class="wrap">
-    <div class="shead"><i>04 / SPEAKER DECKS</i><h2>登壇者のスライドは<em>あと何枚</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>06 / SPEAKER DECKS</i><h2>登壇者のスライドは<em>あと何枚</em></h2><div class="rule"></div></div>
     <p class="lead">クリッカーPCに入っている登壇者様スライド（全81枚）を、登壇者ごとに分けた枚数です。</p>
     <div class="spk"><table>
       <thead><tr><th>登壇者</th><th>プログラム</th><th>切替</th><th>クリッカー通し</th><th>枚数</th></tr></thead>
@@ -342,10 +387,10 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   </div>
 </section>
 
-<section class="sec" id="files">
+<section class="sec alt" id="files">
   <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:10px;right:-80px;width:min(46vw,300px)">
   <div class="wrap">
-    <div class="shead"><i>05 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>07 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
     <p class="lead">OBSやStream Deckに読み込ませるものはGoogleドライブに置いてあります。</p>
     <div class="files">
       <div class="file"><b>OBSシーンコレクション</b><div>
@@ -421,10 +466,10 @@ var PAGES=[["2","概要（集合・服装・回線）","d-02.jpg"],["3","体制�
 ["wire","機材構成図（1枚絵）","wire2.jpg"]];
 var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所・服装","access"],["会場と配信の出し分け","9"],
 ["配信の開始と終了","9"],["BGMが鳴る場所","9"],["機材配置・カメラ位置","8"],["系統と収録（REC）","5"],
-["ケーブルの本数・長さ","11"],["機材の繋ぎこみ（1枚絵）","wire"],["どのポートに何を挿す","6"],["スライドの絵を探す","12"],["登壇者のスライドはあと何枚","speakers"],
+["ケーブルの本数・長さ","11"],["機材の繋ぎこみ（1枚絵）","wire"],["どのポートに何を挿す","6"],["いま何を押せばいい（卓の操作）","ops"],["スライドの絵を探す","12"],["登壇者のスライドはあと何枚","speakers"],
 ["機材リスト","10"],["基調講演のカメラワーク","3"]];
 
-var SECN={access:"会場",speakers:"枚数"};   // ページではない行き先は、何があるかを一語で
+var SECN={access:"会場",speakers:"枚数",ops:"操作"};   // ページではない行き先は、何があるかを一語で
 function pz(n){return "<b>資料</b><u></u>"+String(n).padStart(2,"0");}  // 「なんの・何」で呼ぶ
 function badge(n){return isNaN(n) ? "全体図" : pz(n);}   // 番号を持たないページ  // ページ番号は2桁ゼロ埋め
 // 時間帯ごとに「いま要りそうなもの」を出す。分は0:00からの通算。
@@ -432,9 +477,9 @@ var BANDS=[
  [0,420,"前日・移動中",["会場・集合場所・服装","当日の流れ","担当・体制"]],
  [420,660,"搬入・仕込み",["機材配置・カメラ位置","機材の繋ぎこみ（1枚絵）","どのポートに何を挿す","ケーブルの本数・長さ","機材リスト"]],
  [660,765,"リハ",["系統と収録（REC）","会場と配信の出し分け","基調講演のカメラワーク","担当・体制"]],
- [765,825,"スタンバイ",["配信の開始と終了","会場と配信の出し分け","当日の流れ"]],
- [825,935,"本番・配信中",["会場と配信の出し分け","登壇者のスライドはあと何枚","BGMが鳴る場所","配信の開始と終了"]],
- [935,1050,"第2部〜アフター交流",["当日の流れ","登壇者のスライドはあと何枚","BGMが鳴る場所","会場と配信の出し分け"]],
+ [765,825,"スタンバイ",["いま何を押せばいい（卓の操作）","配信の開始と終了","会場と配信の出し分け","当日の流れ"]],
+ [825,935,"本番・配信中",["いま何を押せばいい（卓の操作）","会場と配信の出し分け","登壇者のスライドはあと何枚","BGMが鳴る場所","配信の開始と終了"]],
+ [935,1050,"第2部〜アフター交流",["いま何を押せばいい（卓の操作）","当日の流れ","登壇者のスライドはあと何枚","BGMが鳴る場所","会場と配信の出し分け"]],
  [1050,1200,"撤去",["ケーブルの本数・長さ","機材リスト","機材の繋ぎこみ（1枚絵）"]],
  [1200,1441,"撤収後",["当日の流れ","機材リスト"]]];
 function nowBand(){
