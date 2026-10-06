@@ -122,6 +122,21 @@ footer{position:relative;overflow:hidden;margin-top:46px;background:var(--navy);
 footer .orn{opacity:.3;mix-blend-mode:screen;left:-50px;bottom:-30px;width:min(50vw,340px)}
 footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;line-height:2}
 
+/* ---------- access / map ---------- */
+.mapwrap{position:relative;z-index:1;margin-top:20px;border:4px solid #fff;border-radius:14px;
+  overflow:hidden;box-shadow:var(--shadow);background:var(--tint2);line-height:0}
+.mapwrap iframe{width:100%;height:380px;border:0;display:block}
+@media (max-width:700px){.mapwrap iframe{height:300px}}
+.mapfb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  height:200px;line-height:1.7;text-decoration:none;color:var(--navy);font-weight:700;font-size:15px}
+.mapfb span{font-size:12.5px;font-weight:400;color:var(--muted)}
+.acc{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.acc .i{flex:1 1 210px;background:#fff;border:4px solid #fff;border-radius:14px;box-shadow:var(--shadow-s);
+  padding:12px 15px;font-size:13.5px;line-height:1.8}
+.acc .i b{display:block;font-size:11.5px;letter-spacing:.06em;color:var(--blue);margin-bottom:1px}
+.acc .i strong{font-family:var(--n);font-size:19px;color:var(--navy)}
+.acc .i a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--line)}
+
 /* ---------- speaker decks ---------- */
 .spk{position:relative;z-index:1;margin-top:20px;background:#fff;border:4px solid #fff;border-radius:14px;
   box-shadow:var(--shadow);overflow:hidden}
@@ -221,7 +236,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <div class="rows">
       <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P4</span></a>
       <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P3</span></a>
-      <a class="row" href="#p2"><span class="q">会場・集合場所・集合時間・服装</span><span class="go">P2</span></a>
+      <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go arw">→</span></a>
       <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P7</span></a>
       <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P7</span></a>
       <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P7</span></a>
@@ -236,19 +251,41 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   </div>
 </section>
 
-<section class="sec alt" id="docs">
+<section class="sec alt" id="access">
+  <img class="orn" src="orn-bl.png" alt="" aria-hidden="true" style="bottom:-50px;left:-70px;width:min(50vw,330px)">
+  <div class="wrap">
+    <div class="shead"><i>02 / ACCESS</i><h2>会場・<em>集合場所</em></h2><div class="rule"></div></div>
+    <p class="lead">集合は 7:00、ベルサール虎ノ門。ピンの位置に集まってください。</p>
+    <div class="mapwrap">
+<!--MAP-->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3241.2955104634443!2d139.746065!3d35.669725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDQwJzExLjAiTiAxMznCsDQ0JzQ1LjgiRQ!5e0!3m2!1sja!2sjp!4v1791283548395!5m2!1sja!2sjp" title="集合場所：ベルサール虎ノ門" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+
+    </div>
+    <div class="acc">
+      <div class="i"><b>集合</b><strong>7:00</strong></div>
+      <div class="i"><b>場所</b><a href="https://maps.app.goo.gl/AMh3VswQAPWgrRah6">ベルサール虎ノ門 2F ↗</a></div>
+      <div class="i"><b>搬入</b>B1F 荷捌き →（搬入用EV）→ 2F 会場</div>
+      <div class="i"><b>服装</b>上下黒のキレイめ</div>
+    </div>
+    <div class="note">
+      <b>車両の留め置きは不可</b>　B1進入から20分を超えると駐車料金が発生します。資材を下ろしたら速やかに移動してください。
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="docs">
   <img class="orn" src="orn-bl.png" alt="" aria-hidden="true" style="bottom:-40px;left:-70px;width:min(52vw,340px)">
   <div class="wrap">
-    <div class="shead"><i>02 / DOCUMENTS</i><h2>資料　<em>全13ページ</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>03 / DOCUMENTS</i><h2>資料　<em>全13ページ</em></h2><div class="rule"></div></div>
     <p class="lead">画像をタップすると拡大します。右下の「目次」からいつでも移動できます。番号は元資料「配信・撮影概要」のページ番号です（表紙は省いています）。</p>
     <div class="pages" id="pages"></div>
   </div>
 </section>
 
-<section class="sec" id="speakers">
+<section class="sec alt" id="speakers">
   <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:-20px;right:-70px;width:min(48vw,310px)">
   <div class="wrap">
-    <div class="shead"><i>03 / SPEAKER DECKS</i><h2>登壇者のスライドは<em>あと何枚</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>04 / SPEAKER DECKS</i><h2>登壇者のスライドは<em>あと何枚</em></h2><div class="rule"></div></div>
     <p class="lead">クリッカーPCに入っている登壇者様スライド（全81枚）を、登壇者ごとに分けた枚数です。</p>
     <div class="spk"><table>
       <thead><tr><th>登壇者</th><th>プログラム</th><th>切替</th><th>クリッカー通し</th><th>枚数</th></tr></thead>
@@ -263,10 +300,10 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   </div>
 </section>
 
-<section class="sec alt" id="files">
+<section class="sec" id="files">
   <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:10px;right:-80px;width:min(46vw,300px)">
   <div class="wrap">
-    <div class="shead"><i>04 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
+    <div class="shead"><i>05 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
     <p class="lead">OBSやStream Deckに読み込ませるものはGoogleドライブに置いてあります。</p>
     <div class="files">
       <div class="file"><b>OBSシーンコレクション</b><div>
@@ -330,7 +367,7 @@ var PAGES=[["2","概要（集合・服装・回線）","d-02.jpg"],["3","体制�
 ["10","スライド一覧 第1部","d-10.jpg"],["11","スライド一覧 配信の終了","d-11.jpg"],
 ["12","スライド一覧 第2部（1/2）","d-12.jpg"],["13","スライド一覧 第2部（2/2）","d-13.jpg"],
 ["14","結線図（OBS2台構成）","wire2.jpg"]];
-var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所・服装","2"],["会場と配信の出し分け","7"],
+var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所・服装","access"],["会場と配信の出し分け","7"],
 ["配信の開始と終了","7"],["BGMが鳴る場所","7"],["機材配置・カメラ位置","6"],["系統と収録（REC）","5"],
 ["ケーブルの本数・長さ","14"],["スライドの絵を探す","10"],["登壇者のスライドはあと何枚","speakers"],
 ["機材リスト","8"],["基調講演のカメラワーク","3"]];
