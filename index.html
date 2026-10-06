@@ -178,6 +178,26 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 .top.on{opacity:1;visibility:visible;transform:none}
 .top:hover{background:var(--navy);color:#fff}
 
+.sheet h4 em{font-style:normal;color:var(--navy);font-weight:700;letter-spacing:0}
+.allq{margin:2px 0 18px}
+.allq summary{list-style:none;cursor:pointer;font-size:12.5px;color:var(--blue);font-weight:700;
+  padding:9px 10px;border-radius:8px;background:var(--tint2)}
+.allq summary::-webkit-details-marker{display:none}
+.allq summary::after{content:" ▾"}
+.allq[open] summary::after{content:" ▴"}
+.now{position:relative;z-index:1;margin-top:18px;background:var(--tint);border-radius:14px;padding:14px 16px}
+.now h3{font-size:13px;color:var(--navy);margin:0 0 9px;font-weight:700}
+.now h3 span{font-family:var(--n);font-size:11.5px;color:var(--blue);margin-left:6px;font-weight:700}
+.nowlist{display:flex;flex-wrap:wrap;gap:8px}
+.nowlist a{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:100px;
+  padding:7px 8px 7px 14px;text-decoration:none;font-size:13px;font-weight:500;
+  box-shadow:rgba(4,101,185,.14) 3px 3px 6px 0}
+.nowlist a .go{display:inline-flex;align-items:baseline;justify-content:center;gap:5px;flex:none;
+  line-height:1.5;width:62px;padding:2px 0;border-radius:100px;background:var(--navy);color:#fff;
+  font-family:var(--n);font-size:11px;font-weight:700}
+.nowlist a .go b{font-family:var(--f);font-size:10px;font-weight:700;opacity:.72}
+.nowlist a .go u{flex:none;align-self:center;width:1px;height:8px;text-decoration:none;background:rgba(255,255,255,.38)}
+
 /* ---------- floating index ---------- */
 .fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;
   display:flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border:0;border-radius:100px;
@@ -252,6 +272,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   <div class="wrap">
     <div class="shead"><i>01 / LOOKUP</i><h2>こんなときは、<em>このページ</em></h2><div class="rule"></div></div>
     <p class="lead">知りたいことから引く。タップでそのページへ飛びます。</p>
+    <div class="now"><h3>いま必要になりそうなもの<span id="bandName2">—</span></h3><div class="nowlist" id="nowRows"></div></div>
     <div class="rows">
       <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go"><b>資料</b><u></u>04</span></a>
       <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go"><b>資料</b><u></u>03</span></a>
@@ -374,7 +395,8 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   <div class="bd" id="bd"></div>
   <div class="panel">
     <button class="close" id="close" type="button">閉じる</button>
-    <h4>LOOKUP</h4><div class="navlist" id="navQ"></div>
+    <h4>いま　<em id="bandName">—</em></h4><div class="navlist" id="navNow"></div>
+    <details class="allq"><summary>ぜんぶ見る</summary><div class="navlist" id="navQ"></div></details>
     <h4>DOCUMENTS</h4><div class="navlist" id="navP"></div>
     <h4>SPEAKER DECKS</h4><div class="navlist" id="navS">
       <a href="#s1"><span class="n">42<b>枚</b></span>① 有沢 正人 様</a>
@@ -405,6 +427,22 @@ var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所�
 var SECN={access:"会場",speakers:"枚数"};   // ページではない行き先は、何があるかを一語で
 function pz(n){return "<b>資料</b><u></u>"+String(n).padStart(2,"0");}  // 「なんの・何」で呼ぶ
 function badge(n){return isNaN(n) ? "結線" : pz(n);}   // 番号を持たない差し込みページ  // ページ番号は2桁ゼロ埋め
+// 時間帯ごとに「いま要りそうなもの」を出す。分は0:00からの通算。
+var BANDS=[
+ [0,420,"前日・移動中",["会場・集合場所・服装","当日の流れ","担当・体制"]],
+ [420,660,"搬入・仕込み",["機材配置・カメラ位置","機材の繋ぎこみ（結線図）","どのポートに何を挿す","ケーブルの本数・長さ","機材リスト"]],
+ [660,765,"リハ",["系統と収録（REC）","会場と配信の出し分け","基調講演のカメラワーク","担当・体制"]],
+ [765,825,"スタンバイ",["配信の開始と終了","会場と配信の出し分け","当日の流れ"]],
+ [825,935,"本番・配信中",["会場と配信の出し分け","登壇者のスライドはあと何枚","BGMが鳴る場所","配信の開始と終了"]],
+ [935,1050,"第2部〜アフター交流",["当日の流れ","登壇者のスライドはあと何枚","BGMが鳴る場所","会場と配信の出し分け"]],
+ [1050,1200,"撤去",["ケーブルの本数・長さ","機材リスト","機材の繋ぎこみ（結線図）"]],
+ [1200,1441,"撤収後",["当日の流れ","機材リスト"]]];
+function nowBand(){
+  var d=new Date(), m=d.getHours()*60+d.getMinutes();
+  for(var i=0;i<BANDS.length;i++){ if(m>=BANDS[i][0]&&m<BANDS[i][1]) return BANDS[i]; }
+  return BANDS[0];
+}
+function hhmm(m){ return ("0"+Math.floor(m/60)).slice(-2)+":"+("0"+(m%60)).slice(-2); }
 var host=document.getElementById("pages"),navP=document.getElementById("navP"),navQ=document.getElementById("navQ");
 PAGES.forEach(function(p){
   var s=document.createElement("section");s.className="page";s.id="p"+p[0];
@@ -421,6 +459,27 @@ PAGES.forEach(function(p){
   a.innerHTML='<span class="n">'+badge(p[0])+'</span>';a.appendChild(document.createTextNode(p[1]));
   a.addEventListener("click",closeSheet);navP.appendChild(a);
 });
+(function(){
+  var band=nowBand(), byTitle={};
+  QS.forEach(function(q){byTitle[q[0]]=q;});
+  var label=band[2]+"　"+hhmm(band[0])+"–"+hhmm(band[1]===1441?1440:band[1]);
+  var bn=document.getElementById("bandName"); if(bn) bn.textContent=band[2];
+  var bn2=document.getElementById("bandName2"); if(bn2) bn2.textContent=label;
+  var nowSheet=document.getElementById("navNow"), nowRows=document.getElementById("nowRows");
+  band[3].forEach(function(t){
+    var q=byTitle[t]; if(!q) return;
+    var sec=SECN.hasOwnProperty(q[1]), href=(sec?"#":"#p")+q[1];
+    var mark=sec?SECN[q[1]]:badge(q[1]);
+    var a1=document.createElement("a"); a1.href=href;
+    a1.innerHTML='<span class="n'+(sec?" arw":"")+'">'+mark+'</span>';
+    a1.appendChild(document.createTextNode(t));
+    a1.addEventListener("click",closeSheet); nowSheet.appendChild(a1);
+    var a2=document.createElement("a"); a2.href=href;
+    a2.appendChild(document.createTextNode(t));
+    var g=document.createElement("span"); g.className="go"+(sec?"":""); g.innerHTML=mark; a2.appendChild(g);
+    nowRows.appendChild(a2);
+  });
+})();
 Array.prototype.forEach.call(document.querySelectorAll("#navS a"),function(a){
   a.addEventListener("click",closeSheet);   // 登壇者の行も押したら閉じる
 });
