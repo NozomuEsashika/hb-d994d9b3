@@ -186,6 +186,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 .fab .cur b{font-family:var(--f);font-size:10px;opacity:.8}
 .fab .cur u{flex:none;align-self:center;width:1px;height:8px;text-decoration:none;
   background:rgba(255,255,255,.45)}
+.fab .cur[hidden]{display:none}
 .fab .cur{display:inline-flex;align-items:baseline;gap:3px;font-family:var(--n);font-size:11px;background:rgba(255,255,255,.24);border-radius:100px;padding:2px 9px}
 .sheet[hidden],.lb[hidden]{display:none!important}
 .sheet{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:flex-end}
@@ -367,7 +368,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 </footer>
 
 <button class="top" id="top" type="button" aria-label="ページの先頭へ戻る" title="先頭へ戻る">↑</button>
-<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur"><b>資料</b><u></u>02</span></button>
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur" hidden></span></button>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="目次">
   <div class="bd" id="bd"></div>
@@ -447,12 +448,20 @@ if("IntersectionObserver" in window){
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
-      var id=e.target.id.slice(1);cur.innerHTML=badge(id);
+      var id=e.target.id.slice(1);cur.innerHTML=badge(id);syncCur();
       links.forEach(function(a){a.setAttribute("aria-current",a.dataset.p===id?"true":"false");});
     });
   },{rootMargin:"-45% 0px -50% 0px"});
   PAGES.forEach(function(p){io.observe(document.getElementById("p"+p[0]));});
 }
+// 資料の節が画面に無いあいだは、現在ページを表示しない（FVで「資料02」と出てしまうため）
+var docsSec=document.getElementById("docs");
+function syncCur(){
+  var r=docsSec.getBoundingClientRect();
+  cur.hidden = !(r.bottom > 70 && r.top < window.innerHeight * 0.55) || !cur.innerHTML;
+}
+window.addEventListener("scroll",syncCur,{passive:true});
+syncCur();
 
 var sheet=document.getElementById("sheet"),fab=document.getElementById("fab");
 function openSheet(){sheet.hidden=false;fab.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";}
