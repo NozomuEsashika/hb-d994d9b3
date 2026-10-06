@@ -88,17 +88,24 @@ html{scroll-behavior:smooth}
   box-shadow:var(--shadow-s);padding:13px 16px;text-decoration:none;transition:transform .16s}
 .row:hover,.row:focus-visible{transform:translateY(-2px)}
 .row .q{flex:1;min-width:0;font-size:14px;font-weight:500}
-.row .go.arw{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)}
-.row:hover .go.arw,.row:focus-visible .go.arw{background:var(--navy);color:#fff}
-.navlist a .n.arw{color:var(--blue)}
-.row .go{font-family:var(--n);font-size:12px;font-weight:700;color:#fff;background:var(--navy);
-  border-radius:5px;padding:2px 9px;white-space:nowrap;min-width:38px;text-align:center}
+
+.row .go{display:inline-flex;align-items:baseline;justify-content:center;gap:5px;flex:none;line-height:1.5;
+  width:68px;padding:3px 0;border-radius:100px;background:var(--navy);color:#fff;
+  font-family:var(--n);font-size:12px;font-weight:700;white-space:nowrap}
+.row .go b{font-family:var(--f);font-size:11px;font-weight:700;opacity:.72}
+.row .go u{flex:none;align-self:center;width:1px;height:10px;text-decoration:none;
+  background:rgba(255,255,255,.38)}
 
 /* ---------- pages ---------- */
 .pages{position:relative;z-index:1;display:flex;flex-direction:column;gap:28px;margin-top:22px}
 .page{scroll-margin-top:66px}
 .ph{display:flex;align-items:center;gap:9px;margin-bottom:10px}
-.ph .n{font-family:var(--n);font-size:11px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 9px;flex:none}
+.ph .n{display:inline-flex;align-items:baseline;justify-content:center;gap:5px;flex:none;line-height:1.5;
+  width:66px;padding:3px 0;border-radius:100px;background:var(--navy);color:#fff;
+  font-family:var(--n);font-size:11.5px;font-weight:700}
+.ph .n b{font-family:var(--f);font-size:10px;font-weight:700;opacity:.72}
+.ph .n u{flex:none;align-self:center;width:1px;height:9px;text-decoration:none;
+  background:rgba(255,255,255,.38)}
 .ph h3{font-size:14.5px;font-weight:700;color:var(--navy);min-width:0}
 .shot{display:block;width:100%;padding:0;border:4px solid #fff;border-radius:14px;overflow:hidden;background:#fff;
   box-shadow:var(--shadow);cursor:zoom-in;line-height:0}
@@ -145,6 +152,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 .spk table{width:100%;border-collapse:collapse;font-size:13.5px}
 .spk th,.spk td{padding:11px 12px;border-top:1px solid var(--line);text-align:left;vertical-align:middle}
 .spk thead th{background:var(--tint);color:var(--navy);font-size:12px;font-weight:700;border-top:0;white-space:nowrap}
+.spk tr[id]{scroll-margin-top:68px}
 .spk .who{font-weight:700;color:var(--navy)}
 .spk .who small{display:block;font-weight:400;font-size:11.5px;color:var(--muted);margin-top:1px}
 .spk .num{font-family:var(--n);white-space:nowrap;color:var(--muted);font-size:12.5px}
@@ -175,7 +183,10 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
   display:flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border:0;border-radius:100px;
   padding:13px 19px;font-family:var(--f);font-size:13px;font-weight:700;cursor:pointer;
   box-shadow:rgba(4,101,185,.45) 4px 6px 16px 0}
-.fab .cur{font-family:var(--n);font-size:11px;background:rgba(255,255,255,.24);border-radius:100px;padding:2px 9px}
+.fab .cur b{font-family:var(--f);font-size:10px;opacity:.8}
+.fab .cur u{flex:none;align-self:center;width:1px;height:8px;text-decoration:none;
+  background:rgba(255,255,255,.45)}
+.fab .cur{display:inline-flex;align-items:baseline;gap:3px;font-family:var(--n);font-size:11px;background:rgba(255,255,255,.24);border-radius:100px;padding:2px 9px}
 .sheet[hidden],.lb[hidden]{display:none!important}
 .sheet{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:flex-end}
 .sheet .bd{position:absolute;inset:0;background:rgba(0,28,56,.45)}
@@ -189,9 +200,14 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 .navlist{display:flex;flex-direction:column;gap:2px;margin-bottom:18px}
 .navlist a{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:8px;text-decoration:none;font-size:13.5px}
 .navlist a:hover{background:var(--tint2)}
-.navlist a .n{font-family:var(--n);font-size:11px;font-weight:700;color:var(--muted);flex:none;width:32px}
+.navlist a .n{display:inline-flex;align-items:baseline;justify-content:center;gap:3px;line-height:1.5;
+  font-family:var(--n);font-size:11px;font-weight:700;color:var(--muted);flex:none;width:46px}
+.navlist a .n b{font-family:var(--f);font-size:10px;font-weight:700;opacity:.8}
+.navlist a .n u{flex:none;align-self:center;width:1px;height:8px;text-decoration:none;
+  background:rgba(110,118,129,.5)}
 .navlist a[aria-current="true"]{background:var(--tint);color:var(--navy);font-weight:700}
 .navlist a[aria-current="true"] .n{color:var(--blue)}
+.navlist a[aria-current="true"] .n u{background:rgba(8,119,215,.5)}
 
 .lb{position:fixed;inset:0;z-index:90;background:rgba(0,22,44,.95);display:flex;align-items:center;justify-content:center;padding:14px;cursor:zoom-out}
 .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
@@ -236,19 +252,19 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <div class="shead"><i>01 / LOOKUP</i><h2>こんなときは、<em>このページ</em></h2><div class="rule"></div></div>
     <p class="lead">知りたいことから引く。タップでそのページへ飛びます。</p>
     <div class="rows">
-      <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P04</span></a>
-      <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P03</span></a>
-      <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go arw">02</span></a>
-      <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P07</span></a>
-      <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P07</span></a>
-      <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P07</span></a>
-      <a class="row" href="#p6"><span class="q">どこに何を置く／カメラ位置</span><span class="go">P06</span></a>
-      <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go">P05</span></a>
-      <a class="row" href="#p14"><span class="q">ケーブルの本数・長さ</span><span class="go">P14</span></a>
-      <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go">P10</span></a>
-      <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go arw">04</span></a>
-      <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P08</span></a>
-      <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P03</span></a>
+      <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go"><b>資料</b><u></u>04</span></a>
+      <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go"><b>資料</b><u></u>03</span></a>
+      <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go">会場</span></a>
+      <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go"><b>資料</b><u></u>07</span></a>
+      <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go"><b>資料</b><u></u>07</span></a>
+      <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go"><b>資料</b><u></u>07</span></a>
+      <a class="row" href="#p6"><span class="q">どこに何を置く／カメラ位置</span><span class="go"><b>資料</b><u></u>06</span></a>
+      <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go"><b>資料</b><u></u>05</span></a>
+      <a class="row" href="#p14"><span class="q">ケーブルの本数・長さ</span><span class="go"><b>資料</b><u></u>14</span></a>
+      <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go"><b>資料</b><u></u>10</span></a>
+      <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go">枚数</span></a>
+      <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go"><b>資料</b><u></u>08</span></a>
+      <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go"><b>資料</b><u></u>03</span></a>
     </div>
   </div>
 </section>
@@ -291,7 +307,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <p class="lead">クリッカーPCに入っている登壇者様スライド（全81枚）を、登壇者ごとに分けた枚数です。</p>
     <div class="spk"><table>
       <thead><tr><th>登壇者</th><th>プログラム</th><th>切替</th><th>クリッカー通し</th><th>枚数</th></tr></thead>
-      <tbody><tr><td class="who">① 有沢 正人 様<small>HR GENESIS株式会社 代表取締役</small></td><td class="prog">基調講演</td><td class="num">14:07頃</td><td class="num">通し 1–42</td><td class="cnt">42枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 43）→ ② オカモトヤ様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">② 鈴木 美穂子 様<small>株式会社オカモトヤ 代表取締役</small></td><td class="prog">事例紹介 1社目</td><td class="num">15:01頃</td><td class="num">通し 44–54</td><td class="cnt">11枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 55）→ ③ 正和興業様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">③ 星 徹 様<small>正和興業株式会社 代表取締役</small></td><td class="prog">事例紹介 2社目</td><td class="num">15:07頃</td><td class="num">通し 56–64</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 65）→ ④ トーリツ様へ</td><td class="cnt">1枚</td></tr><tr><td class="who">④ 鈴木 恵里子 様<small>株式会社トーリツ 代表取締役</small></td><td class="prog">事例紹介 3社目</td><td class="num">15:13頃</td><td class="num">通し 66–74</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 75）→ 交流セッションへ</td><td class="cnt">1枚</td></tr><tr><td class="who">⑤ 荒川 様<small>交流セッション 進行</small></td><td class="prog">交流セッション</td><td class="num">15:50頃</td><td class="num">通し 76–80</td><td class="cnt">5枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 81）→ 終了（会場スクリーンへ戻す）</td><td class="cnt">1枚</td></tr></tbody>
+      <tbody><tr id="s1"><td class="who">① 有沢 正人 様<small>HR GENESIS株式会社 代表取締役</small></td><td class="prog">基調講演</td><td class="num">14:07頃</td><td class="num">通し 1–42</td><td class="cnt">42枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 43）→ ② オカモトヤ様へ</td><td class="cnt">1枚</td></tr><tr id="s2"><td class="who">② 鈴木 美穂子 様<small>株式会社オカモトヤ 代表取締役</small></td><td class="prog">事例紹介 1社目</td><td class="num">15:01頃</td><td class="num">通し 44–54</td><td class="cnt">11枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 55）→ ③ 正和興業様へ</td><td class="cnt">1枚</td></tr><tr id="s3"><td class="who">③ 星 徹 様<small>正和興業株式会社 代表取締役</small></td><td class="prog">事例紹介 2社目</td><td class="num">15:07頃</td><td class="num">通し 56–64</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 65）→ ④ トーリツ様へ</td><td class="cnt">1枚</td></tr><tr id="s4"><td class="who">④ 鈴木 恵里子 様<small>株式会社トーリツ 代表取締役</small></td><td class="prog">事例紹介 3社目</td><td class="num">15:13頃</td><td class="num">通し 66–74</td><td class="cnt">9枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 75）→ 交流セッションへ</td><td class="cnt">1枚</td></tr><tr id="s5"><td class="who">⑤ 荒川 様<small>交流セッション 進行</small></td><td class="prog">交流セッション</td><td class="num">15:50頃</td><td class="num">通し 76–80</td><td class="cnt">5枚</td></tr><tr class="ka"><td colspan="4">切替キーアート（通し 81）→ 終了（会場スクリーンへ戻す）</td><td class="cnt">1枚</td></tr></tbody>
     </table></div>
     <div class="note">
       <b>キーアートは枚数に入れない</b>　通し 43・55・65・75・81 は登壇者のスライドではなく、次の登壇者へ渡すための画です。上の枚数には含めていません。<br>
@@ -349,7 +365,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 </footer>
 
 <button class="top" id="top" type="button" aria-label="ページの先頭へ戻る" title="先頭へ戻る">↑</button>
-<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur">P02</span></button>
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur"><b>資料</b><u></u>02</span></button>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="目次">
   <div class="bd" id="bd"></div>
@@ -357,6 +373,13 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <button class="close" id="close" type="button">閉じる</button>
     <h4>LOOKUP</h4><div class="navlist" id="navQ"></div>
     <h4>DOCUMENTS</h4><div class="navlist" id="navP"></div>
+    <h4>SPEAKER DECKS</h4><div class="navlist" id="navS">
+      <a href="#s1"><span class="n">42<b>枚</b></span>① 有沢 正人 様</a>
+      <a href="#s2"><span class="n">11<b>枚</b></span>② 鈴木 美穂子 様（オカモトヤ）</a>
+      <a href="#s3"><span class="n">9<b>枚</b></span>③ 星 徹 様（正和興業）</a>
+      <a href="#s4"><span class="n">9<b>枚</b></span>④ 鈴木 恵里子 様（トーリツ）</a>
+      <a href="#s5"><span class="n">5<b>枚</b></span>⑤ 荒川 様（交流セッション）</a>
+    </div>
   </div>
 </div>
 
@@ -374,13 +397,13 @@ var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所�
 ["ケーブルの本数・長さ","14"],["スライドの絵を探す","10"],["登壇者のスライドはあと何枚","speakers"],
 ["機材リスト","8"],["基調講演のカメラワーク","3"]];
 
-var SECN={access:"02",speakers:"04"};      // 節番号（見出しの 02 / ACCESS 等と一致）
-function pz(n){return "P"+String(n).padStart(2,"0");}  // ページ番号は2桁ゼロ埋め
+var SECN={access:"会場",speakers:"枚数"};   // ページではない行き先は、何があるかを一語で
+function pz(n){return "<b>資料</b><u></u>"+String(n).padStart(2,"0");}  // 「なんの・何」で呼ぶ  // ページ番号は2桁ゼロ埋め
 var host=document.getElementById("pages"),navP=document.getElementById("navP"),navQ=document.getElementById("navQ");
 PAGES.forEach(function(p){
   var s=document.createElement("section");s.className="page";s.id="p"+p[0];
   var h=document.createElement("div");h.className="ph";
-  var n=document.createElement("span");n.className="n";n.textContent=pz(p[0]);
+  var n=document.createElement("span");n.className="n";n.innerHTML=pz(p[0]);
   var t=document.createElement("h3");t.textContent=p[1];
   h.appendChild(n);h.appendChild(t);
   var b=document.createElement("button");b.className="shot";b.type="button";
@@ -391,6 +414,9 @@ PAGES.forEach(function(p){
   var a=document.createElement("a");a.href="#p"+p[0];a.dataset.p=p[0];
   a.innerHTML='<span class="n">'+pz(p[0])+'</span>';a.appendChild(document.createTextNode(p[1]));
   a.addEventListener("click",closeSheet);navP.appendChild(a);
+});
+Array.prototype.forEach.call(document.querySelectorAll("#navS a"),function(a){
+  a.addEventListener("click",closeSheet);   // 登壇者の行も押したら閉じる
 });
 QS.forEach(function(q){
   var sec=isNaN(q[1]);                      // 数字ならページ、そうでなければ節へのリンク
@@ -416,7 +442,7 @@ if("IntersectionObserver" in window){
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
-      var id=e.target.id.slice(1);cur.textContent=pz(id);
+      var id=e.target.id.slice(1);cur.innerHTML=pz(id);
       links.forEach(function(a){a.setAttribute("aria-current",a.dataset.p===id?"true":"false");});
     });
   },{rootMargin:"-45% 0px -50% 0px"});
