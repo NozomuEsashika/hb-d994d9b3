@@ -88,12 +88,11 @@ html{scroll-behavior:smooth}
   box-shadow:var(--shadow-s);padding:13px 16px;text-decoration:none;transition:transform .16s}
 .row:hover,.row:focus-visible{transform:translateY(-2px)}
 .row .q{flex:1;min-width:0;font-size:14px;font-weight:500}
-.row .go.arw{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy);
-  font-size:12px;padding:2px 10px}
+.row .go.arw{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)}
 .row:hover .go.arw,.row:focus-visible .go.arw{background:var(--navy);color:#fff}
 .navlist a .n.arw{color:var(--blue)}
 .row .go{font-family:var(--n);font-size:12px;font-weight:700;color:#fff;background:var(--navy);
-  border-radius:5px;padding:2px 9px;white-space:nowrap}
+  border-radius:5px;padding:2px 9px;white-space:nowrap;min-width:38px;text-align:center}
 
 /* ---------- pages ---------- */
 .pages{position:relative;z-index:1;display:flex;flex-direction:column;gap:28px;margin-top:22px}
@@ -239,7 +238,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <div class="rows">
       <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P04</span></a>
       <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P03</span></a>
-      <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go arw">→</span></a>
+      <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go arw">02</span></a>
       <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P07</span></a>
       <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P07</span></a>
       <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P07</span></a>
@@ -247,7 +246,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
       <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go">P05</span></a>
       <a class="row" href="#p14"><span class="q">ケーブルの本数・長さ</span><span class="go">P14</span></a>
       <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go">P10</span></a>
-      <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go arw">→</span></a>
+      <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go arw">04</span></a>
       <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P08</span></a>
       <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P03</span></a>
     </div>
@@ -375,6 +374,7 @@ var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所�
 ["ケーブルの本数・長さ","14"],["スライドの絵を探す","10"],["登壇者のスライドはあと何枚","speakers"],
 ["機材リスト","8"],["基調講演のカメラワーク","3"]];
 
+var SECN={access:"02",speakers:"04"};      // 節番号（見出しの 02 / ACCESS 等と一致）
 function pz(n){return "P"+String(n).padStart(2,"0");}  // ページ番号は2桁ゼロ埋め
 var host=document.getElementById("pages"),navP=document.getElementById("navP"),navQ=document.getElementById("navQ");
 PAGES.forEach(function(p){
@@ -395,7 +395,7 @@ PAGES.forEach(function(p){
 QS.forEach(function(q){
   var sec=isNaN(q[1]);                      // 数字ならページ、そうでなければ節へのリンク
   var a=document.createElement("a");a.href=(sec?"#":"#p")+q[1];
-  a.innerHTML='<span class="n'+(sec?" arw":"")+'">'+(sec?"→":pz(q[1]))+'</span>';
+  a.innerHTML='<span class="n'+(sec?" arw":"")+'">'+(sec?SECN[q[1]]:pz(q[1]))+'</span>';
   a.appendChild(document.createTextNode(q[0]));
   a.addEventListener("click",closeSheet);navQ.appendChild(a);
 });
