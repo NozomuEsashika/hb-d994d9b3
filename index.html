@@ -88,7 +88,10 @@ html{scroll-behavior:smooth}
   box-shadow:var(--shadow-s);padding:13px 16px;text-decoration:none;transition:transform .16s}
 .row:hover,.row:focus-visible{transform:translateY(-2px)}
 .row .q{flex:1;min-width:0;font-size:14px;font-weight:500}
-.row .go.arw,.navlist a .n.arw{font-family:var(--n);font-size:13px;line-height:1.3}
+.row .go.arw{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy);
+  font-size:12px;padding:2px 10px}
+.row:hover .go.arw,.row:focus-visible .go.arw{background:var(--navy);color:#fff}
+.navlist a .n.arw{color:var(--blue)}
 .row .go{font-family:var(--n);font-size:12px;font-weight:700;color:#fff;background:var(--navy);
   border-radius:5px;padding:2px 9px;white-space:nowrap}
 
@@ -234,19 +237,19 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
     <div class="shead"><i>01 / LOOKUP</i><h2>こんなときは、<em>このページ</em></h2><div class="rule"></div></div>
     <p class="lead">知りたいことから引く。タップでそのページへ飛びます。</p>
     <div class="rows">
-      <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P4</span></a>
-      <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P3</span></a>
+      <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P04</span></a>
+      <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P03</span></a>
       <a class="row" href="#access"><span class="q">会場・集合場所・集合時間・服装</span><span class="go arw">→</span></a>
-      <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P7</span></a>
-      <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P7</span></a>
-      <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P7</span></a>
-      <a class="row" href="#p6"><span class="q">どこに何を置く／カメラ位置</span><span class="go">P6</span></a>
-      <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go">P5</span></a>
+      <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P07</span></a>
+      <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P07</span></a>
+      <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P07</span></a>
+      <a class="row" href="#p6"><span class="q">どこに何を置く／カメラ位置</span><span class="go">P06</span></a>
+      <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go">P05</span></a>
       <a class="row" href="#p14"><span class="q">ケーブルの本数・長さ</span><span class="go">P14</span></a>
       <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go">P10</span></a>
       <a class="row" href="#speakers"><span class="q">登壇者のスライドはあと何枚</span><span class="go arw">→</span></a>
-      <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P8</span></a>
-      <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P3</span></a>
+      <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P08</span></a>
+      <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P03</span></a>
     </div>
   </div>
 </section>
@@ -347,7 +350,7 @@ footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;
 </footer>
 
 <button class="top" id="top" type="button" aria-label="ページの先頭へ戻る" title="先頭へ戻る">↑</button>
-<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur">P2</span></button>
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur">P02</span></button>
 
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="目次">
   <div class="bd" id="bd"></div>
@@ -372,11 +375,12 @@ var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所�
 ["ケーブルの本数・長さ","14"],["スライドの絵を探す","10"],["登壇者のスライドはあと何枚","speakers"],
 ["機材リスト","8"],["基調講演のカメラワーク","3"]];
 
+function pz(n){return "P"+String(n).padStart(2,"0");}  // ページ番号は2桁ゼロ埋め
 var host=document.getElementById("pages"),navP=document.getElementById("navP"),navQ=document.getElementById("navQ");
 PAGES.forEach(function(p){
   var s=document.createElement("section");s.className="page";s.id="p"+p[0];
   var h=document.createElement("div");h.className="ph";
-  var n=document.createElement("span");n.className="n";n.textContent="P"+p[0];
+  var n=document.createElement("span");n.className="n";n.textContent=pz(p[0]);
   var t=document.createElement("h3");t.textContent=p[1];
   h.appendChild(n);h.appendChild(t);
   var b=document.createElement("button");b.className="shot";b.type="button";
@@ -385,13 +389,13 @@ PAGES.forEach(function(p){
   b.appendChild(i);b.addEventListener("click",function(){openLb(p[2],p[1]);});
   s.appendChild(h);s.appendChild(b);host.appendChild(s);
   var a=document.createElement("a");a.href="#p"+p[0];a.dataset.p=p[0];
-  a.innerHTML='<span class="n">P'+p[0]+'</span>';a.appendChild(document.createTextNode(p[1]));
+  a.innerHTML='<span class="n">'+pz(p[0])+'</span>';a.appendChild(document.createTextNode(p[1]));
   a.addEventListener("click",closeSheet);navP.appendChild(a);
 });
 QS.forEach(function(q){
   var sec=isNaN(q[1]);                      // 数字ならページ、そうでなければ節へのリンク
   var a=document.createElement("a");a.href=(sec?"#":"#p")+q[1];
-  a.innerHTML='<span class="n'+(sec?" arw":"")+'">'+(sec?"→":"P"+q[1])+'</span>';
+  a.innerHTML='<span class="n'+(sec?" arw":"")+'">'+(sec?"→":pz(q[1]))+'</span>';
   a.appendChild(document.createTextNode(q[0]));
   a.addEventListener("click",closeSheet);navQ.appendChild(a);
 });
@@ -412,7 +416,7 @@ if("IntersectionObserver" in window){
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
-      var id=e.target.id.slice(1);cur.textContent="P"+id;
+      var id=e.target.id.slice(1);cur.textContent=pz(id);
       links.forEach(function(a){a.setAttribute("aria-current",a.dataset.p===id?"true":"false");});
     });
   },{rootMargin:"-45% 0px -50% 0px"});
