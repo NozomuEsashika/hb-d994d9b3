@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Meetup event 配信ハンドブック</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+<style>
+/* レイアウト：イベントサイトに準拠。白ベース＋紺の見出し＋青の差し色、
+   カードは白・角丸14px・青い落ち影と水色の内側影。波のあしらいを全面に敷く。単一テーマ。 */
+:root{
+  --navy:#003366; --blue:#0877D7; --teal:#0B7F77; --red:#BD4B47;
+  --fg:#2D2D2D; --muted:#6E7681;
+  --bg:#FFFFFF; --tint:#E4F2FD; --tint2:#F3F7FB; --line:#DCEDFD;
+  --shadow:rgba(4,101,185,.20) 8px 8px 8px 0, rgb(220,237,253) 5px 5px 10px 0 inset;
+  --shadow-s:rgba(4,101,185,.16) 5px 5px 7px 0, rgb(228,242,253) 4px 4px 8px 0 inset;
+  --f:"Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,system-ui,sans-serif;
+  --n:"Roboto","Noto Sans JP",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f);font-size:15px;line-height:1.85;
+  -webkit-text-size-adjust:100%;overflow-x:hidden}
+h1,h2,h3{margin:0;line-height:1.4;text-wrap:balance}
+a{color:inherit}
+.wrap{max-width:1020px;margin-inline:auto;padding-inline:16px}
+.orn{position:absolute;pointer-events:none;z-index:0;user-select:none}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ---------- header band ---------- */
+.band{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#fff;border-bottom:1px solid var(--line)}
+.band-in{max-width:1020px;margin-inline:auto;padding:9px 16px;display:flex;align-items:center;gap:10px}
+.band b{font-size:13px;color:var(--navy);white-space:nowrap}
+.band span{margin-left:auto;font-family:var(--n);font-size:11px;color:var(--blue);white-space:nowrap}
+.band span a{color:var(--blue);text-decoration:none;border-bottom:1px solid currentColor}
+@media (max-width:540px){.band span{display:none}}
+.tag.map{color:var(--navy);border:2px solid var(--navy);text-decoration:none}
+.tag.map:hover{background:var(--navy);color:#fff}
+.tag.map .pin{font-family:var(--n);font-size:11px;opacity:.75}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#0A82E4 0%,#0463AF 46%,#003366 100%);color:#fff}
+.hero .o1{top:-14px;right:-50px;width:min(66vw,500px);opacity:.5;mix-blend-mode:screen}
+.hero .o2{bottom:-40px;left:-60px;width:min(56vw,400px);opacity:.42;mix-blend-mode:screen}
+.hero-in{position:relative;z-index:1;padding-block:38px 34px}
+.eyebrow{font-size:12px;opacity:.9}
+.hero h1{font-size:clamp(28px,7.6vw,46px);font-weight:700;margin-top:10px;letter-spacing:-.01em}
+.hero .sub{font-size:clamp(14px,3.5vw,17px);font-weight:500;margin-top:8px;opacity:.95}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:100px;padding:6px 15px;
+  font-size:12.5px;font-weight:700;white-space:nowrap;box-shadow:0 2px 6px rgba(0,30,70,.18)}
+.tag.v{color:var(--red);border:2px solid var(--red)}
+.tag.z{color:var(--blue);border:2px solid var(--blue)}
+.tag.n{color:var(--navy);border:2px solid var(--navy)}
+
+/* day bar */
+.day{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);border-radius:14px;padding:14px 14px 10px;margin-top:20px}
+.day-h{display:flex;justify-content:space-between;font-family:var(--n);font-size:10.5px;opacity:.92}
+.track{display:flex;height:36px;margin-top:7px;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.16)}
+.seg{display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,.3);min-width:0}
+.seg:last-child{border-right:0}
+.seg span{font-size:10.5px;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.92}
+.seg.main{background:rgba(255,255,255,.32)}.seg.main span{font-weight:700;opacity:1}
+.seg.thin span{display:none}
+.live{position:relative;height:32px;margin-top:5px}
+.live i{position:absolute;top:3px;height:8px;border-radius:100px;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.live em{position:absolute;top:15px;font-family:var(--n);font-size:10.5px;font-style:normal;
+  transform:translateX(-50%);white-space:nowrap;opacity:.95}
+@media (max-width:560px){.seg span{font-size:9.5px;padding:0 2px}}
+
+/* ---------- sections ---------- */
+.sec{position:relative;overflow:hidden;padding-block:40px 10px}
+.sec.alt{background:var(--tint2)}
+.sec .orn{opacity:.5}
+.shead{position:relative;z-index:1}
+.shead i{display:block;font-family:var(--n);font-style:normal;font-size:11.5px;letter-spacing:.14em;color:var(--blue);margin-bottom:4px}
+.shead h2{font-size:clamp(19px,4.8vw,25px);font-weight:700;color:var(--navy)}
+.shead h2 em{font-style:normal;color:var(--blue)}
+.rule{height:4px;width:48px;background:linear-gradient(90deg,#A1EFD9,#0877D7);border-radius:100px;margin-top:12px}
+.lead{position:relative;z-index:1;color:var(--muted);font-size:13.5px;margin:10px 0 0;max-width:62ch}
+
+/* ---------- lookup ---------- */
+.rows{position:relative;z-index:1;display:grid;gap:10px;margin-top:20px}
+@media (min-width:700px){.rows{grid-template-columns:1fr 1fr}}
+.row{display:flex;align-items:center;gap:12px;background:#fff;border:4px solid #fff;border-radius:14px;
+  box-shadow:var(--shadow-s);padding:13px 16px;text-decoration:none;transition:transform .16s}
+.row:hover,.row:focus-visible{transform:translateY(-2px)}
+.row .q{flex:1;min-width:0;font-size:14px;font-weight:500}
+.row .go{font-family:var(--n);font-size:12px;font-weight:700;color:#fff;background:var(--navy);
+  border-radius:5px;padding:2px 9px;white-space:nowrap}
+
+/* ---------- pages ---------- */
+.pages{position:relative;z-index:1;display:flex;flex-direction:column;gap:28px;margin-top:22px}
+.page{scroll-margin-top:66px}
+.ph{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.ph .n{font-family:var(--n);font-size:11px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:2px 9px;flex:none}
+.ph h3{font-size:14.5px;font-weight:700;color:var(--navy);min-width:0}
+.shot{display:block;width:100%;padding:0;border:4px solid #fff;border-radius:14px;overflow:hidden;background:#fff;
+  box-shadow:var(--shadow);cursor:zoom-in;line-height:0}
+.shot img{width:100%;height:auto;display:block;border-radius:10px}
+@media (min-width:920px){
+  .page{display:grid;grid-template-columns:148px 1fr;gap:20px;align-items:start}
+  .ph{flex-direction:column;align-items:flex-start;gap:8px;margin:0;position:sticky;top:72px}
+  .ph h3{font-size:13.5px;line-height:1.6}
+}
+
+/* ---------- files ---------- */
+.files{position:relative;z-index:1;margin-top:20px;background:#fff;border:4px solid #fff;border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden}
+.file{display:flex;gap:12px;padding:14px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.file:first-child{border-top:0}
+.file b{flex:0 0 184px;font-size:13.5px;color:var(--navy)}
+.file div{flex:1;min-width:190px;font-size:13px;line-height:2}
+.file a{color:var(--blue);text-decoration:none;border-bottom:1px solid currentColor}
+.note{position:relative;z-index:1;margin-top:20px;background:var(--tint);border-radius:14px;padding:16px 18px;font-size:13.5px}
+.note b{color:var(--navy)}
+
+footer{position:relative;overflow:hidden;margin-top:46px;background:var(--navy);color:#fff}
+footer .orn{opacity:.3;mix-blend-mode:screen;left:-50px;bottom:-30px;width:min(50vw,340px)}
+footer .wrap{position:relative;z-index:1;padding-block:26px 44px;font-size:12px;line-height:2}
+
+/* ---------- floating index ---------- */
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;
+  display:flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border:0;border-radius:100px;
+  padding:13px 19px;font-family:var(--f);font-size:13px;font-weight:700;cursor:pointer;
+  box-shadow:rgba(4,101,185,.45) 4px 6px 16px 0}
+.fab .cur{font-family:var(--n);font-size:11px;background:rgba(255,255,255,.24);border-radius:100px;padding:2px 9px}
+.sheet[hidden],.lb[hidden]{display:none!important}
+.sheet{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:flex-end}
+.sheet .bd{position:absolute;inset:0;background:rgba(0,28,56,.45)}
+.sheet .panel{position:relative;background:#fff;width:100%;max-height:80vh;overflow:auto;border-radius:16px 16px 0 0;
+  padding:18px 16px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 32px rgba(0,30,70,.3)}
+@media (min-width:760px){.sheet{align-items:stretch}
+  .sheet .panel{width:364px;max-height:none;height:100%;border-radius:0;padding-top:22px}}
+.sheet h4{margin:0 0 10px;font-size:12px;color:var(--blue);letter-spacing:.1em;font-family:var(--n);font-weight:700}
+.sheet .close{position:absolute;top:14px;right:16px;background:var(--tint);border:0;color:var(--navy);
+  border-radius:100px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f)}
+.navlist{display:flex;flex-direction:column;gap:2px;margin-bottom:18px}
+.navlist a{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:8px;text-decoration:none;font-size:13.5px}
+.navlist a:hover{background:var(--tint2)}
+.navlist a .n{font-family:var(--n);font-size:11px;font-weight:700;color:var(--muted);flex:none;width:32px}
+.navlist a[aria-current="true"]{background:var(--tint);color:var(--navy);font-weight:700}
+.navlist a[aria-current="true"] .n{color:var(--blue)}
+
+.lb{position:fixed;inset:0;z-index:90;background:rgba(0,22,44,.95);display:flex;align-items:center;justify-content:center;padding:14px;cursor:zoom-out}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+.lb .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;background:rgba(255,255,255,.2);
+  color:#fff;border:0;border-radius:100px;padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--f)}
+</style>
+
+<div class="band"><div class="band-in">
+  <b>働き方改革 Meetup event</b><span>2026.10.7 WED ／ <a href="https://maps.app.goo.gl/AMh3VswQAPWgrRah6">ベルサール虎ノ門</a></span>
+</div></div>
+
+<header class="hero">
+  <img class="orn o1" src="orn-tr.png" alt="" aria-hidden="true">
+  <img class="orn o2" src="orn-bl.png" alt="" aria-hidden="true">
+  <div class="wrap hero-in">
+    <div class="eyebrow">令和8年度 東京都 働き方改革パワーアップ応援事業</div>
+    <h1>困ったらこれを見る</h1>
+    <div class="sub">配信・撮影クルー 現場ハンドブック</div>
+    <div class="tags">
+      <a class="tag map" href="https://maps.app.goo.gl/AMh3VswQAPWgrRah6">集合 7:00　ベルサール虎ノ門<span class="pin">地図 ↗</span></a>
+      <span class="tag z">配信 13:45–15:35</span>
+      <span class="tag n">完全撤収 20:00</span>
+    </div>
+    <div class="day">
+      <div class="day-h"><span>07:00</span><span>11:00</span><span>14:00</span><span>17:00</span><span>20:00</span></div>
+      <div class="track">
+        <div class="seg" style="flex:0 0 30.77%"><span>搬入・仕込み</span></div>
+        <div class="seg" style="flex:0 0 19.23%"><span>リハ・準備</span></div>
+        <div class="seg thin" style="flex:0 0 3.85%" title="開場 12:45–13:00"><span>開場</span></div>
+        <div class="seg main" style="flex:0 0 23.08%"><span>本 番</span></div>
+        <div class="seg thin" style="flex:0 0 3.85%" title="アフター交流 17:00–17:30"><span>アフター</span></div>
+        <div class="seg" style="flex:0 0 19.22%"><span>撤去</span></div>
+      </div>
+      <div class="live"><i style="left:51.92%;width:14.1%"></i><em style="left:59%">Zoom配信 13:45–15:35</em></div>
+    </div>
+  </div>
+</header>
+
+<section class="sec" id="lookup">
+  <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:-30px;right:-70px;width:min(50vw,330px)">
+  <div class="wrap">
+    <div class="shead"><i>01 / LOOKUP</i><h2>こんなときは、<em>このページ</em></h2><div class="rule"></div></div>
+    <p class="lead">知りたいことから引く。タップでそのページへ飛びます。</p>
+    <div class="rows">
+      <a class="row" href="#p4"><span class="q">当日の流れを知りたい</span><span class="go">P4</span></a>
+      <a class="row" href="#p3"><span class="q">自分の担当は？　誰が何をやる</span><span class="go">P3</span></a>
+      <a class="row" href="#p2"><span class="q">会場・集合場所・集合時間・服装</span><span class="go">P2</span></a>
+      <a class="row" href="#p7"><span class="q">いま会場と配信に何が出てるべき</span><span class="go">P7</span></a>
+      <a class="row" href="#p7"><span class="q">配信はいつ始まっていつ終わる</span><span class="go">P7</span></a>
+      <a class="row" href="#p7"><span class="q">BGMはどこで鳴る</span><span class="go">P7</span></a>
+      <a class="row" href="#p6"><span class="q">どこに何を置く／カメラ位置</span><span class="go">P6</span></a>
+      <a class="row" href="#p5"><span class="q">映像・音声の繋ぎ方／何を録ってるか</span><span class="go">P5</span></a>
+      <a class="row" href="#p14"><span class="q">ケーブルの本数・長さ</span><span class="go">P14</span></a>
+      <a class="row" href="#p10"><span class="q">スライドの絵を探したい</span><span class="go">P10</span></a>
+      <a class="row" href="#p8"><span class="q">使う機材を確認したい</span><span class="go">P8</span></a>
+      <a class="row" href="#p3"><span class="q">基調講演でカメラをどう振る</span><span class="go">P3</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="docs">
+  <img class="orn" src="orn-bl.png" alt="" aria-hidden="true" style="bottom:-40px;left:-70px;width:min(52vw,340px)">
+  <div class="wrap">
+    <div class="shead"><i>02 / DOCUMENTS</i><h2>資料　<em>全14ページ</em></h2><div class="rule"></div></div>
+    <p class="lead">画像をタップすると拡大します。右下の「目次」からいつでも移動できます。</p>
+    <div class="pages" id="pages"></div>
+  </div>
+</section>
+
+<section class="sec" id="files">
+  <img class="orn" src="orn-tr.png" alt="" aria-hidden="true" style="top:10px;right:-80px;width:min(46vw,300px)">
+  <div class="wrap">
+    <div class="shead"><i>03 / SOURCE FILES</i><h2>編集できる<em>元ファイル</em></h2><div class="rule"></div></div>
+    <p class="lead">OBSやStream Deckに読み込ませるものはGoogleドライブに置いてあります。</p>
+    <div class="files">
+      <div class="file"><b>OBSシーンコレクション</b><div>
+        <a href="https://drive.google.com/file/d/1FDFkMQOPSRFpZ5pcxNyi0_AK_RggdjUd/view">会場用 v2</a> ／
+        <a href="https://drive.google.com/file/d/1LN4_HLFviT6V4RwDKfcPIwOklOFRHAUP/view">配信用 v2</a> ／
+        <a href="https://drive.google.com/file/d/1GjnfqwScradE_NUb0KTTvKRQTG2Q9nw7/view">タイマー Lua</a></div></div>
+      <div class="file"><b>Stream Deck プロファイル</b><div>
+        <a href="https://drive.google.com/file/d/1DaK6Nsi28Kn96w1i0wN1rYWUQD-0C5R0/view">Real（会場 / MK.2）</a> ／
+        <a href="https://drive.google.com/file/d/1Wd-asKrkrxRcDdKhu-vLGVQIsDRJfGf4/view">Live（配信 / Neo）</a></div></div>
+      <div class="file"><b>Stream Deck キー配置図</b><div>
+        <a href="https://drive.google.com/file/d/1Edk09nfYQDVRnE9FyAZZPewKB8kvE2Ks/view">会場用 5×3</a> ／
+        <a href="https://drive.google.com/file/d/14GEJINpLWYAPAroAJOo1RjU_eSgNpO48/view">配信用 4×2</a></div></div>
+      <div class="file"><b>本番PCセットアップ手順</b><div>
+        <a href="https://drive.google.com/file/d/1vyZgDoDWnPPPoKkN7yivhDDAySLHJc2T/view">Markdown</a></div></div>
+      <div class="file"><b>進行台本</b><div>
+        <a href="https://drive.google.com/file/d/1hg63OmDuWa641uiICzw76W8cuYXz8rfp/view">第1部（1006）</a> ／
+        <a href="https://drive.google.com/file/d/17Q4DUgyJB19xvkYPsQ5MgNPNP4z8-9Zq/view">第2部（0928）</a></div></div>
+      <div class="file"><b>全体スケジュール</b><div>
+        <a href="https://drive.google.com/file/d/1oASfk7cLfW4L480Q8cT_rZN2BrMyemZU/view">Excel</a></div></div>
+      <div class="file"><b>本番素材フォルダ</b><div>
+        <a href="https://drive.google.com/drive/folders/1w6QNh4YXKHQT4P612hxrjcd5KBtDA4JW">タイスラ</a> ／
+        <a href="https://drive.google.com/drive/folders/1cTfp_mrYNptRyMe58o3iBIuXO-_2JEHl">帯・PinP</a> ／
+        <a href="https://drive.google.com/drive/folders/1UBKo6hNLnxR0JZHDocNUq2mZ0e3yCIV8">1007配信（全体）</a></div></div>
+    </div>
+    <div class="note">
+      <b>搬入</b>　B1F 荷捌き →（搬入用EV）→ 2F 会場。<b>車両の留め置きは不可</b>、B1進入から20分を超えると駐車料金が発生します。<br>
+      <b>連絡</b>　撮影班はワイヤレスインカム（Hollyland Solidcom C1 Pro-6S）、運営とはトランシーバー。<br>
+      <b>リンクが開けない場合</b>　ドライブの共有設定が必要です。江刺家までご連絡ください。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img class="orn" src="orn-bl.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    働き方改革 Meetup event ／ 令和8年度 東京都 働き方改革パワーアップ応援事業<br>
+    and,a株式会社　配信・撮影
+  </div>
+</footer>
+
+<button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="sheet">目次<span class="cur" id="cur">P1</span></button>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="目次">
+  <div class="bd" id="bd"></div>
+  <div class="panel">
+    <button class="close" id="close" type="button">閉じる</button>
+    <h4>LOOKUP</h4><div class="navlist" id="navQ"></div>
+    <h4>DOCUMENTS</h4><div class="navlist" id="navP"></div>
+  </div>
+</div>
+
+<div class="lb" id="lb" hidden><button class="x" id="lbx" type="button">閉じる</button><img id="lbi" alt=""></div>
+
+<script>
+var PAGES=[["1","表紙","d-01.jpg"],["2","概要（集合・服装・回線）","d-02.jpg"],["3","体制と役割","d-03.jpg"],
+["4","当日スケジュール","d-04.jpg"],["5","配信・収録の系統","d-05.jpg"],["6","会場レイアウト・機材配置","d-06.jpg"],
+["7","会場と配信の出し分け／BGM","d-07.jpg"],["8","機材リスト 1/2","d-08.jpg"],["9","機材リスト 2/2","d-09.jpg"],
+["10","スライド一覧 第1部","d-10.jpg"],["11","スライド一覧 配信の終了","d-11.jpg"],
+["12","スライド一覧 第2部（1/2）","d-12.jpg"],["13","スライド一覧 第2部（2/2）","d-13.jpg"],
+["14","結線図（OBS2台構成）","wire2.jpg"]];
+var QS=[["当日の流れ","4"],["担当・体制","3"],["会場・集合場所・服装","2"],["会場と配信の出し分け","7"],
+["配信の開始と終了","7"],["BGMが鳴る場所","7"],["機材配置・カメラ位置","6"],["系統と収録（REC）","5"],
+["ケーブルの本数・長さ","14"],["スライドの絵を探す","10"],["機材リスト","8"],["基調講演のカメラワーク","3"]];
+
+var host=document.getElementById("pages"),navP=document.getElementById("navP"),navQ=document.getElementById("navQ");
+PAGES.forEach(function(p){
+  var s=document.createElement("section");s.className="page";s.id="p"+p[0];
+  var h=document.createElement("div");h.className="ph";
+  var n=document.createElement("span");n.className="n";n.textContent="P"+p[0];
+  var t=document.createElement("h3");t.textContent=p[1];
+  h.appendChild(n);h.appendChild(t);
+  var b=document.createElement("button");b.className="shot";b.type="button";
+  b.setAttribute("aria-label",p[1]+" を拡大");
+  var i=document.createElement("img");i.src=p[2];i.alt=p[1];i.loading="lazy";
+  b.appendChild(i);b.addEventListener("click",function(){openLb(p[2],p[1]);});
+  s.appendChild(h);s.appendChild(b);host.appendChild(s);
+  var a=document.createElement("a");a.href="#p"+p[0];a.dataset.p=p[0];
+  a.innerHTML='<span class="n">P'+p[0]+'</span>';a.appendChild(document.createTextNode(p[1]));
+  a.addEventListener("click",closeSheet);navP.appendChild(a);
+});
+QS.forEach(function(q){
+  var a=document.createElement("a");a.href="#p"+q[1];
+  a.innerHTML='<span class="n">P'+q[1]+'</span>';a.appendChild(document.createTextNode(q[0]));
+  a.addEventListener("click",closeSheet);navQ.appendChild(a);
+});
+
+var cur=document.getElementById("cur"),links=navP.querySelectorAll("a[data-p]");
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var id=e.target.id.slice(1);cur.textContent="P"+id;
+      links.forEach(function(a){a.setAttribute("aria-current",a.dataset.p===id?"true":"false");});
+    });
+  },{rootMargin:"-45% 0px -50% 0px"});
+  PAGES.forEach(function(p){io.observe(document.getElementById("p"+p[0]));});
+}
+
+var sheet=document.getElementById("sheet"),fab=document.getElementById("fab");
+function openSheet(){sheet.hidden=false;fab.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";}
+function closeSheet(){sheet.hidden=true;fab.setAttribute("aria-expanded","false");document.body.style.overflow="";}
+fab.addEventListener("click",function(){sheet.hidden?openSheet():closeSheet();});
+document.getElementById("bd").addEventListener("click",closeSheet);
+document.getElementById("close").addEventListener("click",closeSheet);
+
+var lb=document.getElementById("lb"),lbi=document.getElementById("lbi");
+function openLb(s,a){lbi.src=s;lbi.alt=a;lb.hidden=false;document.body.style.overflow="hidden";}
+function closeLb(){lb.hidden=true;lbi.src="";document.body.style.overflow="";}
+lb.addEventListener("click",closeLb);
+document.getElementById("lbx").addEventListener("click",closeLb);
+document.addEventListener("keydown",function(e){
+  if(e.key!=="Escape")return;
+  if(!lb.hidden)closeLb();else if(!sheet.hidden)closeSheet();
+});
+</script>
